@@ -1,23 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Customer Support Chat</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      height: 100vh;
-      background: #ffffff;
-      font-family: Arial, sans-serif;
-    }
-  </style>
 </head>
+
 <body>
 
-  <!-- Zoho SalesIQ Chat Widget -->
-<script>window.$zoho=window.$zoho || {};$zoho.salesiq=$zoho.salesiq||{ready:function(){}}</script><script id="zsiqscript" src="https://salesiq.zohopublic.in/widget?wc=siq06958cbe80d3af11e6d025e87038a88657cac8329c4b9fe806b6399799bb82fc" defer></script>
+<script>
+  // Read URL Parameters
+  const params = new URLSearchParams(window.location.search);
+
+  const userName = params.get("name") || "Guest User";
+  const userEmail = params.get("email") || "";
+  const userPhone = params.get("phone") || "";
+  const userId = params.get("userid") || "";
+
+  window.$zoho = window.$zoho || {};
+  $zoho.salesiq = $zoho.salesiq || {
+    ready: function () {
+  /* 🚀 Auto open the chat window */
+      $zoho.salesiq.floatwindow.visible("show");
+      $zoho.salesiq.floatwindow.open();
+
+      /* 🟥 Hide CLOSE button */
+      $zoho.salesiq.floatwindow.hide("close");
+      /* 🔥 Pass Dynamic User Details */
+      if (userName)  $zoho.salesiq.visitor.name(userName);
+      if (userEmail) $zoho.salesiq.visitor.email(userEmail);
+      if (userPhone) $zoho.salesiq.visitor.contactnumber(userPhone);
+      if (userId)    $zoho.salesiq.visitor.addInfo("UserID", userId);
+
+    
+    }
+  };
+</script>
+
+<script id="zsiqscript"
+src="https://salesiq.zohopublic.in/widget?wc=siq06958cbe80d3af11e6d025e87038a88657cac8329c4b9fe806b6399799bb82fc"
+defer>
+</script>
 
 </body>
 </html>
